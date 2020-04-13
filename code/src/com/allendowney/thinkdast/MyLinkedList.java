@@ -217,8 +217,15 @@ public class MyLinkedList<E> implements List<E> {
 
     @Override
     public E remove(int index) {
-        //TODO: FILL THIS IN!
-        return null;
+        Node node = getNode(index);
+        if (index == 0) {
+            head = node.next;
+        } else {
+            Node prev = getNode(index - 1);
+            prev.next = node.next;
+        }
+        size--;
+        return node.data;
     }
 
     @Override
