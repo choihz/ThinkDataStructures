@@ -4,6 +4,7 @@ import com.allendowney.thinkdast.Profiler.Timeable;
 import org.jfree.data.xy.XYSeries;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class ProfileListAdd {
@@ -13,8 +14,8 @@ public class ProfileListAdd {
      */
     public static void main(String[] args) {
 //        profileArrayListAddEnd();
-        profileArrayListAddBeginning();
-        //profileLinkedListAddBeginning();
+//        profileArrayListAddBeginning();
+        profileLinkedListAddBeginning();
         //profileLinkedListAddEnd();
     }
 
@@ -68,7 +69,24 @@ public class ProfileListAdd {
      * Characterize the run time of adding to the beginning of a LinkedList
      */
     public static void profileLinkedListAddBeginning() {
-        // TODO: FILL THIS IN!
+        Timeable timeable = new Timeable() {
+            List<String> list;
+
+            @Override
+            public void setup(int n) {
+                list = new LinkedList<String>();
+            }
+
+            @Override
+            public void timeMe(int n) {
+                for (int i = 0; i < n; i++) {
+                    list.add(0, "a string");
+                }
+            }
+        };
+        int startN = 4000;
+        int endMillis = 10000;
+        runProfiler("LinkedList add beginning", timeable, startN, endMillis);
     }
 
     /**
